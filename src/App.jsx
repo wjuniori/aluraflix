@@ -1,20 +1,10 @@
 import React from "react";
-import styled from "styled-components";
 import Menu from "./components/Menu/Menu";
 import BannerMain from "./components/BannerMain/BannerMain";
 import data from "./data/data.json";
 import VideoCardGroup from "./components/VideoCardGroup/VideoCardGroup";
 import Footer from "./components/Footer/Footer";
-
-const AppWrapper = styled.div`
-  background: var(--grayDark);
-
-  padding-top: 94px;
-
-  @media (max-width: 800px) {
-    padding-top: 40px;
-  }
-`;
+import { AppWrapper } from "./App.styles";
 
 const App = () => (
   <AppWrapper>
