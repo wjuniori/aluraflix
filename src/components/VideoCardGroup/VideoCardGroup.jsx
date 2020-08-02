@@ -25,12 +25,14 @@ const VideoCardGroup = ({ ignoreFirstVideo, category }) => (
       {category.videos.map(
         (video, index) =>
           !(ignoreFirstVideo && index === 0) && (
-            <VideoCard
-              key={index}
-              title={video.titulo}
-              url={video.url}
-              categoryColor={category.cor}
-            />
+            <li>
+              <VideoCard
+                key={index}
+                title={video.titulo}
+                url={video.url}
+                categoryColor={category.cor}
+              />
+            </li>
           )
       )}
     </VideoCardList>
