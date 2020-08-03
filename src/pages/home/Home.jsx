@@ -1,12 +1,12 @@
 import React from "react";
-import Menu from "./components/Menu/Menu";
-import BannerMain from "./components/BannerMain/BannerMain";
-import data from "./data/data.json";
-import VideoCardGroup from "./components/VideoCardGroup/VideoCardGroup";
-import Footer from "./components/Footer/Footer";
-import { AppWrapper } from "./App.styles";
+import Menu from "../../components/Menu/Menu";
+import BannerMain from "../../components/BannerMain/BannerMain";
+import data from "../../data/data.json";
+import VideoCardGroup from "../../components/VideoCardGroup/VideoCardGroup";
+import Footer from "../../components/Footer/Footer";
+import { AppWrapper } from "./Home.styles";
 
-const App = () => (
+const Home = () => (
   <AppWrapper>
     <Menu />
 
@@ -28,4 +28,4 @@ const App = () => (
   </AppWrapper>
 );
 
-export default App;
+export default Home;
