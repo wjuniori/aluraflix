@@ -1,15 +1,11 @@
 import React from "react";
-import Menu from "../../components/Menu/Menu";
 import BannerMain from "../../components/BannerMain/BannerMain";
 import data from "../../data/data.json";
-import VideoCardGroup from "../../components/VideoCardGroup/VideoCardGroup";
-import Footer from "../../components/Footer/Footer";
-import { AppWrapper } from "./Home.styles";
+import Carousel from "../../components/Carousel/Carousel";
+import PageDefault from "../../components/PageDefault/PageDefault";
 
 const Home = () => (
-  <AppWrapper>
-    <Menu />
-
+  <PageDefault>
     <BannerMain
       title={data.categorias[0].videos[0].titulo}
       description="O que é Front-end? Trabalhando na área os termos HTML, CSS e JavaScript fazem parte da rotina das desenvolvedoras e desenvolvedores. Mas o que eles fazem, afinal? Descubra com a Vanessa!"
@@ -18,14 +14,12 @@ const Home = () => (
 
     {data.categorias.map((category, index) => {
       return index === 0 ? (
-        <VideoCardGroup key={index} ignoreFirstVideo category={category} />
+        <Carousel key={index} ignoreFirstVideo category={category} />
       ) : (
-        <VideoCardGroup key={index} category={category} />
+        <Carousel key={index} category={category} />
       );
     })}
-
-    <Footer />
-  </AppWrapper>
+  </PageDefault>
 );
 
 export default Home;
