@@ -6,6 +6,8 @@ export const BannerMainContainer = styled.section`
   background-position: center;
   color: var(--white);
   height: 80vh;
+  margin-left: -5%;
+  margin-right: -5%;
 
   @media (max-width: 800px) {
     height: auto;

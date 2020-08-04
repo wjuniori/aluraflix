@@ -1,14 +1,10 @@
 import React from "react";
-import {
-  VideoCardGroupContainer,
-  VideoCardList,
-  Title,
-  ExtraLink,
-} from "./VideoCardGroup.styles";
+import { CarouselContainer, Title, ExtraLink } from "./Carousel.styles";
 import VideoCard from "./components/VideoCard/VideoCard";
+import Slider, { SliderItem } from "./components/Slider/Slider";
 
-const VideoCardGroup = ({ ignoreFirstVideo, category }) => (
-  <VideoCardGroupContainer>
+const Carousel = ({ ignoreFirstVideo, category }) => (
+  <CarouselContainer>
     {category.titulo && (
       <>
         <Title style={{ backgroundColor: category.cor || "red" }}>
@@ -21,22 +17,21 @@ const VideoCardGroup = ({ ignoreFirstVideo, category }) => (
         )}
       </>
     )}
-    <VideoCardList>
+    <Slider>
       {category.videos.map(
         (video, index) =>
           !(ignoreFirstVideo && index === 0) && (
-            <li>
+            <SliderItem key={index}>
               <VideoCard
-                key={index}
                 title={video.titulo}
                 url={video.url}
                 categoryColor={category.cor}
               />
-            </li>
+            </SliderItem>
           )
       )}
-    </VideoCardList>
-  </VideoCardGroupContainer>
+    </Slider>
+  </CarouselContainer>
 );
 
-export default VideoCardGroup;
+export default Carousel;

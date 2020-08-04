@@ -1,9 +1,8 @@
 import styled from "styled-components";
 
-export const VideoCardGroupContainer = styled.section`
+export const CarouselContainer = styled.section`
   color: var(--white);
   min-height: 197px;
-  margin-left: 5%;
   margin-bottom: 16px;
 `;
 
@@ -36,17 +35,5 @@ export const ExtraLink = styled.a`
     display: block;
     margin-bottom: 16px;
     margin-left: 0;
-  }
-`;
-
-export const VideoCardList = styled.ul`
-  display: flex;
-  list-style: none;
-  margin: 0;
-  overflow-x: auto;
-  padding-left: 0;
-
-  li {
-    margin-right: 16px;
   }
 `;
