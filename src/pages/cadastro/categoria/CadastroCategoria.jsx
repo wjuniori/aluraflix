@@ -1,20 +1,76 @@
-import React from "react";
+import React, { useState } from "react";
 import PageDefault from "../../../components/PageDefault/PageDefault";
 import { Link } from "react-router-dom";
+import FormField from "../../../components/FormField/FormField";
 
-const CadastroCategoria = () => (
-  <PageDefault>
-    <h1>Cadastro de Categoria</h1>
+const CadastroCategoria = () => {
+  const categoryInitial = {
+    name: "",
+    description: "",
+    color: "",
+  };
 
-    <form>
-      <label>Nome da Categoria:</label>
-      <input type="text" />
+  const [category, setCategory] = useState(categoryInitial);
+  const [categories, setCategories] = useState([]);
 
-      <button>Cadastrar</button>
-    </form>
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    setCategories([...categories, category]);
+    setCategory(categoryInitial);
+  };
 
-    <Link to="/">Ir para home</Link>
-  </PageDefault>
-);
+  const handleChange = (event) => {
+    setCategory({
+      ...category,
+      [event.target.name]: event.target.value,
+    });
+  };
+
+  return (
+    <PageDefault>
+      <h1>Cadastro de Categoria: {category.name}</h1>
+
+      <form onSubmit={handleSubmit}>
+        <FormField
+          label="Nome da Categoria"
+          type="text"
+          name="name"
+          value={category.name}
+          onChange={handleChange}
+        />
+
+        <div>
+          <label>
+            Descrição:
+            <textarea
+              type="text"
+              value={category.description}
+              name="description"
+              onChange={handleChange}
+            />
+          </label>
+        </div>
+
+        <FormField
+          label="Cor"
+          type="color"
+          name="color"
+          value={category.color}
+          onChange={handleChange}
+        />
+
+        <button>Cadastrar</button>
+      </form>
+
+      <ul>
+        {categories.map((category, index) => (
+          <li key={index}>{category.name}</li>
+        ))}
+      </ul>
+
+      <Link to="/">Ir para home</Link>
+    </PageDefault>
+  );
+};
 
 export default CadastroCategoria;
