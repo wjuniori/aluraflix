@@ -3,7 +3,7 @@ import PageDefault from "../../../components/PageDefault/PageDefault";
 import { Link } from "react-router-dom";
 import FormField from "../../../components/FormField/FormField";
 
-const CadastroCategoria = () => {
+const RegisterCategory = () => {
   const categoryInitial = {
     name: "",
     description: "",
@@ -73,4 +73,4 @@ const CadastroCategoria = () => {
   );
 };
 
-export default CadastroCategoria;
+export default RegisterCategory;

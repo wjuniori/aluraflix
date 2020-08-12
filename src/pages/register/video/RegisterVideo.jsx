@@ -2,7 +2,7 @@ import React from "react";
 import PageDefault from "../../../components/PageDefault/PageDefault";
 import { Link } from "react-router-dom";
 
-const CadastroVideo = () => (
+const RegisterVideo = () => (
   <PageDefault>
     <h1>Cadastro de Video</h1>
 
@@ -10,4 +10,4 @@ const CadastroVideo = () => (
   </PageDefault>
 );
 
-export default CadastroVideo;
+export default RegisterVideo;
