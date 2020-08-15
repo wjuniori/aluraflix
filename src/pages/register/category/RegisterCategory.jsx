@@ -1,17 +1,27 @@
-import React, { useState } from "react";
-import PageDefault from "../../../components/PageDefault/PageDefault";
-import { Link } from "react-router-dom";
-import FormField from "../../../components/FormField/FormField";
+import React, { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
+import PageDefault from '../../../components/PageDefault/PageDefault';
+import FormField from '../../../components/FormField/FormField';
+import Button from '../../../components/Button/Button';
 
 const RegisterCategory = () => {
   const categoryInitial = {
-    name: "",
-    description: "",
-    color: "",
+    name: '',
+    description: '',
+    color: '#000000',
   };
 
   const [category, setCategory] = useState(categoryInitial);
   const [categories, setCategories] = useState([]);
+
+  useEffect(() => {
+    const URL = 'http://localhost:8080/categorias';
+
+    fetch(URL).then(async (resp) => {
+      const categories = await resp.json();
+      setCategories(categories);
+    });
+  }, []);
 
   const handleSubmit = (event) => {
     event.preventDefault();
@@ -28,7 +38,11 @@ const RegisterCategory = () => {
 
   return (
     <PageDefault>
-      <h1>Cadastro de Categoria: {category.name}</h1>
+      <h1>
+        Cadastro de Categoria:
+        {' '}
+        {category.name}
+      </h1>
 
       <form onSubmit={handleSubmit}>
         <FormField
@@ -39,17 +53,13 @@ const RegisterCategory = () => {
           onChange={handleChange}
         />
 
-        <div>
-          <label>
-            Descrição:
-            <textarea
-              type="text"
-              value={category.description}
-              name="description"
-              onChange={handleChange}
-            />
-          </label>
-        </div>
+        <FormField
+          label="Descrição"
+          type="textarea"
+          name="description"
+          value={category.description}
+          onChange={handleChange}
+        />
 
         <FormField
           label="Cor"
@@ -59,8 +69,14 @@ const RegisterCategory = () => {
           onChange={handleChange}
         />
 
-        <button>Cadastrar</button>
+        <Button>Cadastrar</Button>
       </form>
+
+      {!categories.length && (
+        <div>
+          Loading...
+        </div>
+      )}
 
       <ul>
         {categories.map((category, index) => (
