@@ -15,7 +15,7 @@ const RegisterCategory = () => {
   const [categories, setCategories] = useState([]);
 
   useEffect(() => {
-    const URL = 'http://localhost:8080/categorias';
+    const URL = window.location.hostname.includes('localhost') ? 'http://localhost:8080/categorias' : 'https://aluraflix-wjuniori.herokuapp.com/categorias';
 
     fetch(URL).then(async (resp) => {
       const categories = await resp.json();
