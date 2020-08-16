@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import PageDefault from '../../../components/PageDefault/PageDefault';
 import FormField from '../../../components/FormField/FormField';
 import Button from '../../../components/Button/Button';
+import { URL_DEV, URL_PROD } from '../../../constants';
 
 const RegisterCategory = () => {
   const categoryInitial = {
@@ -11,15 +12,21 @@ const RegisterCategory = () => {
     color: '#000000',
   };
 
+  const [isLoading, setIsLoading] = useState(false);
   const [category, setCategory] = useState(categoryInitial);
   const [categories, setCategories] = useState([]);
 
   useEffect(() => {
-    const URL = window.location.hostname.includes('localhost') ? 'http://localhost:8080/categorias' : 'https://aluraflix-wjuniori.herokuapp.com/categorias';
+    setIsLoading(true);
+    const URL = window.location.hostname.includes('localhost') ? URL_DEV : URL_PROD;
 
     fetch(URL).then(async (resp) => {
       const categories = await resp.json();
       setCategories(categories);
+    }).catch(() => {
+      alert('Serviço indisponível! Favor, tentar novamente.');
+    }).finally(() => {
+      setIsLoading(false);
     });
   }, []);
 
@@ -72,17 +79,18 @@ const RegisterCategory = () => {
         <Button>Cadastrar</Button>
       </form>
 
-      {!categories.length && (
+      {isLoading ? (
         <div>
           Loading...
         </div>
-      )}
-
-      <ul>
-        {categories.map((category, index) => (
-          <li key={index}>{category.name}</li>
-        ))}
-      </ul>
+      )
+        : (
+          <ul>
+            {categories.map((category, index) => (
+              <li key={index}>{category.name}</li>
+            ))}
+          </ul>
+        )}
 
       <Link to="/">Ir para home</Link>
     </PageDefault>
