@@ -3,26 +3,31 @@ import { Link } from 'react-router-dom';
 import PageDefault from '../../../components/PageDefault/PageDefault';
 import FormField from '../../../components/FormField/FormField';
 import Button from '../../../components/Button/Button';
-import { URL_DEV, URL_PROD } from '../../../constants';
+// import { URL_DEV, URL_PROD } from '../../../config';
+import useForm from '../../../hooks/useForm';
+import config from '../../../config';
+// import { URL_BASE } from '../../../config';
 
 const RegisterCategory = () => {
-  const categoryInitial = {
+  const [category, handleChange, clearForm] = useForm({
     name: '',
     description: '',
     color: '#000000',
-  };
-
+  });
   const [isLoading, setIsLoading] = useState(false);
-  const [category, setCategory] = useState(categoryInitial);
   const [categories, setCategories] = useState([]);
 
   useEffect(() => {
     setIsLoading(true);
-    const URL = window.location.hostname.includes('localhost') ? URL_DEV : URL_PROD;
+    // const URL = window.location.hostname.includes('localhost') ? URL_DEV : URL_PROD;
 
-    fetch(URL).then(async (resp) => {
+    fetch(config.URL_BASE).then(async (resp) => {
       const categories = await resp.json();
-      setCategories(categories);
+      setCategories(categories.map((category) => ({
+        name: category.titulo,
+        description: category.link_extra ? category.link_extra.text : '',
+        color: category.cor,
+      })));
     }).catch(() => {
       alert('Serviço indisponível! Favor, tentar novamente.');
     }).finally(() => {
@@ -33,14 +38,7 @@ const RegisterCategory = () => {
   const handleSubmit = (event) => {
     event.preventDefault();
     setCategories([...categories, category]);
-    setCategory(categoryInitial);
-  };
-
-  const handleChange = (event) => {
-    setCategory({
-      ...category,
-      [event.target.name]: event.target.value,
-    });
+    clearForm();
   };
 
   return (
